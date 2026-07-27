@@ -1,0 +1,17 @@
+
+@import "tailwindcss";
+
+@theme {
+  --color-lc-dark: #1a1a1a;
+  --color-lc-panel: #282828;
+  --color-lc-border: #3e3e3e;
+  --color-lc-orange: #ffa116;
+  --color-lc-orange-hover: #e08e12;
+}
+
+@layer base {
+  body {
+    /* Subtle text and sharp dark background */
+    @apply bg-zinc-50 text-zinc-900 dark:bg-lc-dark dark:text-zinc-300 antialiased;
+  }
+}

@@ -1,0 +1,16 @@
+
+
+import { createRoot } from 'react-dom/client'
+import { WelcomeApp } from './WelcomeApp'
+import './styles.css'
+
+console.log('[From the sidebar page context] Hello regular page!')
+
+const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+	throw new Error('Sidebar root element not found')
+}
+
+const reactRoot = createRoot(rootElement as HTMLElement)
+reactRoot.render(<WelcomeApp />)

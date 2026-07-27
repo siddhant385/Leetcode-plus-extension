@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json.schemastore.org/chrome-manifest.json",
+  "chromium:manifest_version": 3,
+  "firefox:manifest_version": 2,
+  "version": "1.0.0",
+  "name": "leetcode-extension",
+  "description": "Leetcode extension with some premium features.",
+  "icons": {
+    "16": "images/icon.png",
+    "32": "images/icon.png",
+    "48": "images/icon.png",
+    "64": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "chromium:action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "images/icon.png",
+      "32": "images/icon.png",
+      "48": "images/icon.png",
+      "64": "images/icon.png",
+      "128": "images/icon.png"
+    },
+    "default_title": "Leetcode+"
+  },
+  "firefox:browser_action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "images/icon.png",
+      "32": "images/icon.png",
+      "48": "images/icon.png",
+      "64": "images/icon.png",
+      "128": "images/icon.png"
+    },
+    "default_title": "Leetcode+"
+  }, 
+  "chromium:permissions": [
+    "cookies",
+    "storage",
+    "tabs"
+  ],
+  "firefox:permissions": [
+    "cookies",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://github.com/*",
+    "https://api.github.com/*"
+  ],
+  "background": {
+    "chromium:service_worker": "background/index.ts",
+    "firefox:scripts": [
+      "background/index.ts"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/*"
+      ],
+      "js": [
+        "content/scripts.tsx"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page":"welcome/index.html",
+    "open_in_tab": true
+  },
+  "author": "siddhant385"
+}

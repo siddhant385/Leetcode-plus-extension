@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lc-dark: #1a1a1a;
+  --color-lc-panel: #282828;
+  --color-lc-border: #3e3e3e;
+  --color-lc-orange: #ffa116;
+  --color-lc-orange-hover: #e08e12;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    width: 320px;
+    height: 420px;
+    margin: 0;
+    overflow: hidden;
+    background: #fdfcfc;
+  }
+
+  body {
+    @apply text-zinc-900 antialiased;
+  }
+}

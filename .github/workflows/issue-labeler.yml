@@ -1,0 +1,48 @@
+name: Issue Auto-Labeler
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write # Required to add labels to issues
+
+jobs:
+  label-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-label Issue based on keywords
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            // Combine title and body to search for keywords
+            const content = (issue.title + ' ' + (issue.body || '')).toLowerCase();
+            const labelsToAdd = [];
+            
+            // Keyword matching logic
+            if (content.match(/\b(bug|error|fail|crash|broken|issue|not working)\b/i)) {
+              labelsToAdd.push('bug');
+            }
+            if (content.match(/\b(feature|enhancement|add|support|idea|improve)\b/i)) {
+              labelsToAdd.push('enhancement');
+            }
+            if (content.match(/\b(doc|docs|readme|documentation|guide)\b/i)) {
+              labelsToAdd.push('documentation');
+            }
+            if (content.match(/\b(how|why|help|question)\b/i)) {
+              labelsToAdd.push('question');
+            }
+            
+            // Apply labels if any matches are found
+            if (labelsToAdd.length > 0) {
+              await github.rest.issues.addLabels({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                labels: labelsToAdd
+              });
+              console.log(`Added labels: ${labelsToAdd.join(', ')}`);
+            } else {
+              console.log('No keywords matched, no labels added.');
+            }
