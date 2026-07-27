@@ -21,11 +21,12 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+        # Removed hardcoded version so it uses packageManager from package.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
           cache: 'pnpm'
 
       - name: Install Dependencies
@@ -43,4 +44,4 @@ jobs:
         uses: coderabbitai/ai-pr-reviewer@latest
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          openai_api_key: ${{ secrets.OPENAI_API_KEY }} # Note: CodeRabbit allows a free tier without this, but it's here if you want to use a custom LLM
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
