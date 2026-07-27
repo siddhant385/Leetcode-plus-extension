@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*' # Trigger on version tags like v1.0.0, v2.1.3, etc.
+  workflow_dispatch: # Allows manual triggering from the GitHub Actions UI
 
 permissions:
   contents: write # Required for GitHub Actions to create a Release
@@ -19,6 +20,8 @@ jobs:
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
